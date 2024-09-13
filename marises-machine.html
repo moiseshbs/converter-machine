@@ -2,9 +2,9 @@
 <html lang="pt-br">
 
 <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Converter Machine</title>
+        <title>Document</title>
 </head>
 
 <body>
@@ -13,59 +13,44 @@
                 <button onclick="binario()">Binario</button>
                 <button onclick="octal()">Octal</button>
                 <button onclick="hexadecimal()">Hexadecimal</button>
-
-                <button onclick="opBase()">Operações Matematicas</button>
         </div>
-</body>
 
-</html>
+        <script>
 
-<script>
+                function decimal() {
+                        div_teste.innerHTML =
+                                `
+                                <input id="input_decimal" type="text" placeholder="Digite o valor em decimal">
+                                <button onclick="converterDecimal()">Converter valor</button>
+                        `;
+                }
 
-// ------------------------ CONVERTER BASES ------------------------
-
-        function decimal() {
-                div_teste.innerHTML =
-                        `
-                        <input id="input_decimal" type="number" placeholder="Digite o valor em decimal">
-                        <button onclick="converterDecimal()">Converter valor</button>
-                        <p id="p_resul"></p>
-                `;
-        }
-
-        function binario() {
-                div_teste.innerHTML =
-                        `
-                        <input id="input_binario" type="number" placeholder="Digite o valor em binario">
+                function binario() {
+                        div_teste.innerHTML =
+                                `
+                        <input id="input_binario" type="text" placeholder="Digite o valor em binario">
                         <button onclick="converterBinario()">Converter valor</button>
+                        `;
+                }
 
-                        <p id="p_resul"></p>
-                `;
-        }
-
-        function octal() {
-                div_teste.innerHTML =
-                        `
-                        <input id="input_octal" type="number" placeholder="Digite o valor em octal">
+                function octal() {
+                        div_teste.innerHTML =
+                                `
+                        <input id="input_octal" type="text" placeholder="Digite o valor em octal">
                         <button onclick="converterOctal()">Converter valor</button>
-                        <p id="p_resul"></p>
-                `;
-        }
+                        `;
+                }
 
-        function hexadecimal() {
-                div_teste.innerHTML =
-                        `
+                function hexadecimal() {
+                        div_teste.innerHTML =
+                                `
                         <input id="input_hexadecimal" type="text" placeholder="Digite o valor em hexadecimal">
                         <button onclick="converterHexadecimal()">Converter valor</button>
-                        <p id="p_resul"></p>
-                `;
-        }
+                        `;
+                }
 
-        function converterDecimal() {
-                var decimalUser = Number(input_decimal.value);
-
-                if (decimalUser != '') {
-                        p_resul.innerHTML = ``;
+                function converterDecimal() {
+                        var decimalUser = Number(input_decimal.value);
 
                         let octal = decimalUser.toString(8);
 
@@ -73,149 +58,64 @@
 
                         let binaria = decimalUser.toString(2);
 
-                        p_resul.innerHTML = 
-                        `
-                                Decimal: ${decimalUser}
-                                <br>
-                                Binario: ${binaria}
-                                <br>
-                                Octal: ${octal}
-                                <br>
-                                Hexadecimal: ${hexadecimal}
-                        `;
-                } else {
-                        p_resul.innerHTML = `<span style="color: red">Digite os valores corretamente!</span>`;
+                        console.log(decimalUser);
+                        console.log(octal);
+                        console.log(hexadecimal);
+                        console.log(binaria);
                 }
-        }
 
-        function converterBinario() {
-                var binarioUser = Number(input_binario.value);
+                function converterBinario() {
+                        var binarioUser = Number(input_binario.value);
 
-                if (binarioUser != '') {
                         let decimal = parseInt(binarioUser, 2);
 
                         let octal = decimal.toString(8);
 
                         let hexadecimal = decimal.toString(16);
 
-                        p_resul.innerHTML = 
-                        `
-                                Binario: ${binarioUser}
-                                <br>
-                                Decimal: ${decimal}
-                                <br>
-                                Octal: ${octal}
-                                <br>
-                                Hexadecimal: ${hexadecimal}
-                        `;
-                } else {
-                        p_resul.innerHTML = `<span style="color: red">Digite os valores corretamente!</span>`;
+                        console.log('binario:' + binarioUser);
+                        console.log('decimal:' + decimal);
+                        console.log('octal:' + octal);
+                        console.log('hexadecimal:' + hexadecimal);
+
                 }
 
+                function converterOctal() {
+                        var octalUser = Number(input_octal.value);
 
-        }
-
-        function converterOctal() {
-                var octalUser = Number(input_octal.value);
-
-                if(octalUser != '') {
                         let decimal = parseInt(octalUser, 8);
 
                         let hexadecimal = decimal.toString(16);
 
                         let binaria = decimal.toString(2);
 
-                        p_resul.innerHTML = 
-                        `
-                                Octal: ${octalUser}
-                                <br>
-                                Decimal: ${decimal}
-                                <br>
-                                Binario: ${binaria}
-                                <br>
-                                Hexadecimal: ${hexadecimal}
-                        `;
-                } else {
-                        p_resul.innerHTML = `<span style="color: red">Digite os valores corretamente!</span>`;
+                        console.log('octal:' + octalUser);
+                        console.log('decimal:' + decimal);
+                        console.log('hexadecimal:' + hexadecimal);
+                        console.log('binario:' + binaria);
                 }
-                
-        }
 
-        function converterHexadecimal() {
-                var hexaUser = input_hexadecimal.value;
+                function converterHexadecimal() {
+                        // Converte o valor inserido em hexadecimal para decimal
+                        let hexaUser = input_hexadecimal.value.trim(); // Remove espaços e caracteres indesejados
 
-                if(hexaUser != '') {
-                        var regexHex = /^[0-9a-fA-F]+$/; // Aceita números de 0-9 e letras de A-F (maiúsculas e minúsculas)
+                        // Verifica se o valor inserido é um número hexadecimal válido
+                        const regexHex = /^[0-9a-fA-F]+$/; // Aceita números de 0-9 e letras de A-F (maiúsculas e minúsculas)
 
+                        // Converte o valor de hexadecimal para decimal
                         let decimal = parseInt(hexaUser, 16);
 
-                        let binaria = decimal.toString(2);
-
+                        // Agora que temos o valor em decimal, convertemos para outras bases
+                        let binario = decimal.toString(2);
                         let octal = decimal.toString(8);
 
-                        p_resul.innerHTML = 
-                        `
-                                Hexadecimal: ${hexaUser}
-                                <br>
-                                Decimal: ${decimal}
-                                <br>
-                                Binario: ${binaria}
-                                <br>
-                                Octal: ${octal}
-                        `;
-                } else {
-                        p_resul.innerHTML = `<span style="color: red">Digite os valores corretamente!</span>`;
+                        console.log("Hexadecimal:", hexaUser);
+                        console.log("Decimal:", decimal);
+                        console.log("Binário:", binario);
+                        console.log("Octal:", octal);
                 }
 
-        }
+        </script>
+</body>
 
-// ------------------------ OPERARCOES COM BASES ------------------------
-
-        function opBase() {
-                div_teste.innerHTML =
-                `
-                        <input type="radio" id="radio_decimal" name="base" value="10">Decimal</input>
-                        <input type="radio" id="radio_binaria" name="base" value="2">Binaria</input>
-                        <input type="radio" id="radio_octal" name="base" value="8">Octal</input>
-                        <input type="radio" id="radio_hexadecimal" name="base" value="16">Hexadecimal</input>
-
-                        <br><br>
-
-                        <input id="input_octal1" type="text" placeholder="Digite o valor em octal">
-                        <input id="input_opcao" type="text" style="width: 20px">
-                        <input id="input_octal2" type="text" placeholder="Digite o valor em octal">
-                        <span id="span_resul"></span>
-
-                        <br><br>
-
-                        <button onclick="calcularBase()">Calcular valor</button>
-                `;
-        }
-
-        function calcularBase() {
-                var octalUser1 = input_octal1.value;
-                var octalUser2 = input_octal2.value;
-                var operador = input_opcao.value;
-                var base = document.querySelector('input[name="base"]:checked').value;
-
-                let decimal1 = parseInt(octalUser1, base);
-                let decimal2 = parseInt(octalUser2, base);
-
-                if(operador == '+') {
-                        var decimalResul = decimal1 + decimal2;
-                }
-                if(operador == '-') {
-                        var decimalResul = decimal1 - decimal2;
-                }
-                if(operador == '/') {
-                        var decimalResul = decimal1 / decimal2;
-                }
-                if(operador == '*') {
-                        var decimalResul = decimal1 * decimal2;
-                }
-   
-                let resultado = decimalResul.toString(base);
-
-                span_resul.innerHTML = `${resultado}`;
-        }
-</script>
+</html>
