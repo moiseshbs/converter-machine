@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { 
+    background-image: url('https://i.gifer.com/embedded/download/2I93.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.painel, .painel2, .painel3 {
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    max-width: 600px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #333;
+    font-size: 1.8em;
+}
+
+.botao, .input, .converter {
+    height: 50px;
+    width: 100%;
+    max-width: 250px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    color: #333;
+    margin: 10px 0;
+    font-size: 1em;
+    background: #f4f4f4;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.botao {
+    background-color: #333;
+    color: white;
+}
+
+.botao:hover {
+    background-color: #555;
+    color: #ddd;
+}
+
+.input, .converter {
+    background-color: #fff;
+}
+
+.input:focus, .converter:focus {
+    outline: none;
+    border-color: #666;
+}
+
+.converter {
+    background-color: #eee;
+}
+
+.converter:hover {
+    background-color: #ddd;
+}
+
+input[type="text"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+span#span_resul {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #333;
+}
+        
+    </style>
+</head>
+
+<body>
+    <div id="div_teste">
+        <br><br><br><br><br><br><br><br><br>
+        <div class="painel">
+            <h1>Converter Machine</h1>
+            <button onclick="coBase()" class="botao">Converter bases</button><br><br>
+            <button onclick="opBase()" class="botao">Operações Matemáticas</button>
+        </div>
+    </div>
+
+    <script>
+        function coBase() {
+            div_teste.innerHTML = `
+            <br><br><br><br><br>
+                <div class="painel2">
+                    <h1>Converter Bases</h1>
+                    <input type="radio" id="radio_decimal" name="base" value="10">Decimal
+                    <input type="radio" id="radio_binaria" name="base" value="2">Binária
+                    <input type="radio" id="radio_octal" name="base" value="8">Octal
+                    <input type="radio" id="radio_hexadecimal" name="base" value="16">Hexadecimal
+                    <br><br>
+                    <input type="text" id="input_valor" placeholder="Digite o valor a ser convertido" class="input">
+                    <br><br>
+                    <button class="botao" onclick="converterBase()">Converter valor</button>
+                    <p id="span_resul"></p>
+                </div>
+            `;
+        }
+
+        function converterBase() {
+            var valorUser = document.getElementById('input_valor').value;
+            var base = document.querySelector('input[name="base"]:checked').value;
+
+            let decimal = parseInt(valorUser, base);
+
+            let binaria = decimal.toString(2);
+            let octal = decimal.toString(8);
+            let hexadecimal = decimal.toString(16);
+
+            if (base == 10) {
+                document.getElementById('span_resul').innerHTML = `
+                    Decimal: ${valorUser}
+                    <br><br>
+                    Binária: ${binaria}
+                    <br><br>
+                    Octal: ${octal}
+                    <br><br>
+                    Hexadecimal: ${hexadecimal}
+                `;
+            } else if (base == 2) {
+                document.getElementById('span_resul').innerHTML = `
+                    Decimal: ${decimal}
+                    <br><br>
+                    Binária: ${valorUser}
+                    <br><br>
+                    Octal: ${octal}
+                    <br><br>
+                    Hexadecimal: ${hexadecimal}
+                `;
+            } else if (base == 8) {
+                document.getElementById('span_resul').innerHTML = `
+                    Decimal: ${decimal}
+                    <br><br>
+                    Binária: ${binaria}
+                    <br><br>
+                    Octal: ${valorUser}
+                    <br><br>
+                    Hexadecimal: ${hexadecimal}
+                `;
+            } else if (base == 16) {
+                document.getElementById('span_resul').innerHTML = `
+                    Decimal: ${decimal}
+                    <br><br>
+                    Binária: ${binaria}
+                    <br><br>
+                    Octal: ${octal}
+                    <br><br>
+                    Hexadecimal: ${valorUser}
+                `;
+            }
+        }
+
+        function opBase() {
+            div_teste.innerHTML = `
+            <br><br><br>
+                <div class="painel3">
+                    <h1>Operações Matemáticas</h1>
+                    <input type="radio" id="radio_decimal" name="base" value="10">Decimal
+                    <input type="radio" id="radio_binaria" name="base" value="2">Binária
+                    <input type="radio" id="radio_octal" name="base" value="8">Octal
+                    <input type="radio" id="radio_hexadecimal" name="base" value="16">Hexadecimal
+                    <br><br>
+                    <input id="input_octal1" type="text" class="input">
+                    <input id="input_opcao" type="text" style="width: 30px; text-align: center;">
+                    <input id="input_octal2" type="text" class="input">
+                    <br><br>
+                    <span id="span_resul"></span>
+                    <br><br>
+                    <button class="botao" onclick="calcularBase()">Calcular valor</button>
+                </div>
+            `;
+        }
+
+        function calcularBase() {
+            var valorUser1 = document.getElementById('input_octal1').value;
+            var valorUser2 = document.getElementById('input_octal2').value;
+            var operador = document.getElementById('input_opcao').value;
+            var base = document.querySelector('input[name="base"]:checked').value;
+
+            let decimal1 = parseInt(valorUser1, base);
+            let decimal2 = parseInt(valorUser2, base);
+
+            let decimalResul;
+
+            if (operador == '+') {
+                decimalResul = decimal1 + decimal2;
+            } else if (operador == '-') {
+                decimalResul = decimal1 - decimal2;
+            } else if (operador == '/') {
+                decimalResul = decimal1 / decimal2;
+            } else if (operador == '*') {
+                decimalResul = decimal1 * decimal2;
+            }
+
+            let resultado = decimalResul.toString(base);
+
+            document.getElementById('span_resul').innerHTML = `${resultado}`;
+        }
+    </script>
+</body>
+
+</html>
